@@ -2850,8 +2850,9 @@ class TiffTag(object):
         except KeyError:
             raise TiffTag.Error("unknown tag data type %i" % self._type)
 
+        small_fmt = '%s%i%s' % (byteorder, int(dtype[0]), dtype[1])
+        size = count*struct.calcsize(small_fmt)
         fmt = '%s%i%s' % (byteorder, count*int(dtype[0]), dtype[1])
-        size = struct.calcsize(fmt)
         if size > parent.offset_size or code in CUSTOM_TAGS:
             pos = fh.tell()
             tof = {4: 'I', 8: 'Q'}[parent.offset_size]
