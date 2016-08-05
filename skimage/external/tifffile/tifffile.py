@@ -1985,6 +1985,7 @@ class TiffPage(object):
                     if name not in tags:
                         tags[name] = tag
                         break
+                    i += 1
 
         pos = fh.tell()  # where offset to next IFD can be found
 
